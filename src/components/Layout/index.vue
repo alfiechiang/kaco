@@ -19,7 +19,7 @@ import Content from "./Content/index.vue"
     position: fixed;
     top: 0;
     left: 0;
-    background: red;
+    background: #112F51;
     height: 100%;
 }
 

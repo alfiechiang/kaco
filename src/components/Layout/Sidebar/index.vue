@@ -1,7 +1,9 @@
 <template>
-    <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
-        @close="handleClose">
-        <el-menu-item index="1-1">首客生鮮採購系統</el-menu-item>
+    <el-menu default-active="2"  background-color="#112F51" :collapse="isCollapse" @open="handleOpen"
+        @close="handleClose" text-color="#fff"	>
+        <div class="sidebar-icon">
+            <span>首客生鮮採購系統</span>
+        </div>
         <el-sub-menu index="1">
             <template #title>
                 <el-icon>
@@ -35,7 +37,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const isCollapse = ref(true)
+const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
@@ -48,6 +50,22 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 
 </script>
-<style lang="">
+<style lang="scss" scoped>
+
+.el-menu-item{
+    background-color: #112F51;
+}
+
+
+
+.white-color{
+    color: #fff;
+}
+
+.sidebar-icon{
+    color: #fff;
+    padding: 20px;
+    font-size: small;
+}
     
 </style>
