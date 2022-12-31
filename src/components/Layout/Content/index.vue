@@ -11,6 +11,7 @@
  .header {
     height: 50px;
     width: 100%;
+    background: pink;
  }
 
  .warapper {
