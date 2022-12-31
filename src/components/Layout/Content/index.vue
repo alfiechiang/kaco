@@ -9,7 +9,6 @@
 </script>
 <style lang="scss">
  .header {
-    background: aqua;
     height: 50px;
     width: 100%;
  }
@@ -18,7 +17,6 @@
     margin: 20px;
     height: 100%;
     width: 100%;
-    background: red;
  }
     
 </style>
