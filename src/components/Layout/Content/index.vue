@@ -15,6 +15,7 @@
  }
 
  .warapper {
+    padding: 10px 10px 10px 80px;
     height: 93%;
     width: 100%;
  }

@@ -27,7 +27,7 @@ import Content from "./Content/index.vue"
 }
 
 .content {
-    padding-left: 180px;
+    padding-left: 100px;
     width: 100%;
     height: 100%; 
 }
