@@ -35,12 +35,13 @@ const collapseEvent =()=>{
 }
 
 .content {
-    padding-left: 150px;
+    padding-left: 100px;
     width: 100%;
     height: 100%; 
 }
 
 .active {
-    padding-left: 50px;
+    width: 100%;
+    height: 100%; 
 }
 </style>
