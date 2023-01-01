@@ -3,11 +3,12 @@
     <div class="sidebar">
         <Sidebar :isOpen="isOpen"></Sidebar>
     </div>
-    <div class="content">
-        <Content :isOpen="isOpen" @collapseEvent="collapseEvent"></Content>
+    <div :class="{active:isOpen,content:!isOpen}">
+        <Content :isOpen="isOpen"  @collapseEvent="collapseEvent"></Content>
     </div>
 
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 import Sidebar from "./Sidebar/index.vue"
@@ -34,8 +35,12 @@ const collapseEvent =()=>{
 }
 
 .content {
-    padding-left: 100px;
+    padding-left: 150px;
     width: 100%;
     height: 100%; 
+}
+
+.active {
+    padding-left: 50px;
 }
 </style>
