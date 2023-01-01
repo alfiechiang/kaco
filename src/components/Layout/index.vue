@@ -15,16 +15,20 @@ import Content from "./Content/index.vue"
 
 </script>
 <style lang="scss">
+
+
+
 .sidebar {
+    height: 100%; 
     position: fixed;
     top: 0;
     left: 0;
-    background: #112F51;
-    height: 100%;
 }
 
 .content {
+
+
     width: 100%;
-    height: 100%;    
+    height: 100%; 
 }
 </style>

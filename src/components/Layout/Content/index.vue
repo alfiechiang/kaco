@@ -9,14 +9,13 @@
 </script>
 <style lang="scss">
  .header {
-    height: 50px;
+    height: 7%;
     width: 100%;
     background: pink;
  }
 
  .warapper {
-    margin: 20px;
-    height: 100%;
+    height: 93%;
     width: 100%;
  }
     
