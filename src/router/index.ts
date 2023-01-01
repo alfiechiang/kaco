@@ -12,11 +12,9 @@ const router = createRouter({
       component: Layout,
       children:[
         {
-
-          path: '/info',
-          name: 'info',
-          component: Info,
-
+          path:"/product",
+          name:"product",
+          component: ()=> import("../views/product/index.vue")
         }
       ]
 

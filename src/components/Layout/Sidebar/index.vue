@@ -56,6 +56,10 @@ const handleClose = (key: string, keyPath: string[]) => {
     background-color: #112F51;
 }
 
+.el-menu{
+    border: none;
+}
+
 
 
 .white-color{

@@ -19,15 +19,15 @@ import Content from "./Content/index.vue"
 
 
 .sidebar {
-    height: 100%; 
+    height: 100%;
+    background-color: #112F51;
     position: fixed;
     top: 0;
     left: 0;
 }
 
 .content {
-
-
+    padding-left: 180px;
     width: 100%;
     height: 100%; 
 }
