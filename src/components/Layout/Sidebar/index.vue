@@ -1,20 +1,16 @@
 <template>
-    <el-menu default-active="2"  background-color="#112F51" :collapse="isCollapse" @open="handleOpen"
-        @close="handleClose" text-color="#fff"	>
+    <el-menu :default-active="route.path"  background-color="#112F51" :collapse="isOpen" @open="handleOpen"
+        @close="handleClose" text-color="#fff"	router >
         <div class="sidebar-icon">
             <span>首客生鮮採購系統</span>
         </div>
-        <el-sub-menu index="1">
+        <el-sub-menu index="/product">
             <template #title>
-                <el-icon>
-                    <location />
-                </el-icon>
-                <span>首頁</span>
+                <el-icon><Menu /></el-icon>
+                <span>產品</span>
             </template>
-                <el-menu-item index="1-1">item one</el-menu-item>
-                <el-menu-item index="1-2">item two</el-menu-item>
-                <el-menu-item index="1-3">item three</el-menu-item>
-                <el-menu-item index="1-4-1">item one</el-menu-item>
+                <el-menu-item index="category">產品分類</el-menu-item>
+                <el-menu-item index="list">產品列表</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="2">
             <el-icon><Menu /></el-icon>
@@ -36,11 +32,25 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import {useRoute} from 'vue-router'
+
+const props = defineProps({
+    isOpen: Boolean
+})
+
+
 
 const isCollapse = ref(false)
+const route =useRoute()
+const isCollapseEvent = () =>{
+    alert("Hello World")
+}
+
+
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
+
 const handleClose = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 }
