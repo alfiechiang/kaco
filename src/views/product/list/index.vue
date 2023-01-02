@@ -22,7 +22,6 @@
 
    <div class="option">
       <el-button type="success">添加商品</el-button>
-      <el-button type="danger">删除商品</el-button>
    </div>
 
    <el-table ref="dataTableRef" :data="roleList" highlight-current-row border>
@@ -121,7 +120,7 @@ const handleCurrentChange = (val: number) => {
 .pager {
    width: 100%;
    height: 100px;
-
+   padding-left: 20px;
    padding-top: 20px;
 
 }
