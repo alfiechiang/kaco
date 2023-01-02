@@ -2,12 +2,12 @@
 
    <div class="search">
       <el-form ref="queryFormRef" :inline="true">
-         <el-form-item prop="keywords" label="產品名稱">
-            <el-input placeholder="產品名稱" clearable />
+         <el-form-item prop="code" label="產品名稱">
+            <el-input v-model="search.code" placeholder="產品名稱"  />
          </el-form-item>
 
          <el-form-item label="產品類型" prop="region">
-            <el-select placeholder="產品類型">
+            <el-select v-model="search.category" placeholder="產品類型">
                <el-option label="Zone one" value="shanghai" />
                <el-option label="Zone two" value="beijing" />
             </el-select>
@@ -31,10 +31,10 @@
       <el-table-column label="商品描述" align="center" width="100" prop="sort" />
       <el-table-column label="操作" align="left">
          <template #default="scope">
-            <el-button type="primary" link>
+            <el-button type="primary">
                编辑
             </el-button>
-            <el-button type="danger" link>
+            <el-button type="danger">
                删除
             </el-button>
          </template>
@@ -48,11 +48,17 @@ import { Search, Refresh } from '@element-plus/icons-vue';
 
 
 const state = reactive({
-   roleList: []
+   roleList: [],
+   search :{
+      code:"",
+      category:""
+
+   }
 })
 
 const {
    roleList,
+   search
 } = toRefs(state);
 
 
