@@ -45,6 +45,14 @@
          </template>
       </el-table-column>
    </el-table>
+
+
+   <div class="pager">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="4"
+         :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+         :total="400">
+      </el-pagination>
+   </div>
 </template>
 <script setup lang="ts">
 
@@ -95,12 +103,30 @@ const data: any = [
 roleList.value = data
 
 
+const handleSizeChange = (val: number) => {
+   console.log(`每页 ${val} 条`);
+
+}
+
+const handleCurrentChange = (val: number) => {
+   console.log(`当前页: ${val}`);
+
+}
 
 
 
 
 </script>
 <style lang="scss">
+.pager {
+   width: 100%;
+   height: 100px;
+
+   padding-top: 20px;
+
+}
+
+
 .search {
    width: 100%;
    height: 65px;
