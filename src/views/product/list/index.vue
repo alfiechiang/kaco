@@ -3,7 +3,7 @@
    <div class="search">
       <el-form ref="queryFormRef" :inline="true">
          <el-form-item prop="code" label="產品名稱">
-            <el-input v-model="search.code" placeholder="產品名稱"  />
+            <el-input v-model="search.code" placeholder="產品名稱" />
          </el-form-item>
 
          <el-form-item label="產品類型" prop="region">
@@ -18,6 +18,11 @@
             <el-button :icon="Refresh">重置</el-button>
          </el-form-item>
       </el-form>
+   </div>
+
+   <div class="option">
+      <el-button type="success">添加商品</el-button>
+      <el-button type="danger">删除商品</el-button>
    </div>
 
    <el-table ref="dataTableRef" :data="roleList" highlight-current-row border>
@@ -43,15 +48,17 @@
 </template>
 <script setup lang="ts">
 
+//E3E7ED
+
 import { reactive, toRefs } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue';
 
 
 const state = reactive({
    roleList: [],
-   search :{
-      code:"",
-      category:""
+   search: {
+      code: "",
+      category: ""
 
    }
 })
@@ -93,7 +100,19 @@ roleList.value = data
 
 
 </script>
-<style lang="">
-    
+<style lang="scss">
+.search {
+   width: 100%;
+   height: 65px;
+   border: 1px solid #E3E7ED;
+   padding: 15px;
+}
+
+.option {
+   margin-top: 10px;
+   width: 100%;
+   height: 50px;
+
+}
 </style>
 
