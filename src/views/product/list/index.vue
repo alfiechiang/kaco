@@ -24,15 +24,15 @@
       <el-button type="success">添加商品</el-button>
    </div>
 
-   <el-table ref="dataTableRef" :data="roleList" highlight-current-row border>
+   <el-table ref="dataTableRef" :data="productList" highlight-current-row border>
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="商品編號" prop="name" width="100" />
-      <el-table-column label="商品名稱" prop="code" width="100" />
-      <el-table-column label="商品價格" prop="code" width="100" />
-      <el-table-column label="商品類目" align="center" width="100" prop="sort" />
-      <el-table-column prop="createTime" label="添加时间" width="170" />
-      <el-table-column label="商品賣點" align="center" width="100" prop="sort" />
-      <el-table-column label="商品描述" align="center" width="100" prop="sort" />
+      <el-table-column label="商品編號" prop="product_id" width="100" />
+      <el-table-column label="商品名稱" prop="name" width="100" />
+      <el-table-column label="商品價格" prop="price" width="100" />
+      <el-table-column label="商品類目" align="center" width="100" prop="category" />
+      <el-table-column label="添加时间" width="170" prop="createtime"/>
+      <el-table-column label="商品賣點" align="center" width="100" prop="product_hot" />
+      <el-table-column label="商品描述" align="center" width="100" prop="description" />
       <el-table-column label="操作" align="left">
          <template #default="scope">
             <el-button type="primary">
@@ -62,7 +62,7 @@ import { Search, Refresh } from '@element-plus/icons-vue';
 
 
 const state = reactive({
-   roleList: [],
+   productList: [],
    search: {
       code: "",
       category: ""
@@ -71,35 +71,34 @@ const state = reactive({
 })
 
 const {
-   roleList,
+   productList,
    search
 } = toRefs(state);
 
 
-
 const data: any = [
    {
-      code: "ADMIN",
-      createTime: "2021-03-25 12:39:25",
-      id: "2",
-      name: "超級管理員",
-      sort: 2,
-      status: 1,
-      updateTime: null
+      product_id: 1,
+      name: "香菇",
+      price: 20,
+      category: "蔬菜",
+      createtime: "2022 12-31 23:59:59",
+      product_hot: "天然香菇",
+      description: "xxxxxxxxx"
    },
    {
-      code: "GUEST",
-      createTime: "2021-03-25 12:39:25",
-      id: "3",
-      name: "訪問遊客",
-      sort: 3,
-      status: 1,
-      updateTime: null
+      product_id: 2,
+      name: "香菜",
+      price: 30,
+      category: "蔬菜",
+      createtime: "2022 12-31 23:59:59",
+      product_hot: "天然香菜",
+      description: "xxxxxxxxx"
    }
 
 ];
 
-roleList.value = data
+productList.value = data
 
 
 const handleSizeChange = (val: number) => {
