@@ -54,34 +54,42 @@
 
 
 
-   <el-dialog v-model="dialogFormVisible" title="Shipping address">
-      <el-form :model="form">
-        <el-form-item label="Promotion name" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="Zones" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="Please select a zone">
-            <el-option label="Zone No.1" value="shanghai" />
-            <el-option label="Zone No.2" value="beijing" />
-          </el-select>
-        </el-form-item>
+   <el-dialog v-model="dialogFormVisible" title="新增商品">
+      <el-form :model="productCreate">
+         <el-form-item label="商品名稱" :label-width="formLabelWidth">
+            <el-input v-model="productCreate.name" autocomplete="off" />
+         </el-form-item>
+         <el-form-item label="商品分類" :label-width="formLabelWidth">
+            <el-select v-model="productCreate.category" placeholder="Please select a zone">
+               <el-option v-for="item in category" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+         </el-form-item>
+         <el-form-item label="商品價格" :label-width="formLabelWidth">
+            <el-input v-model="productCreate.price" autocomplete="off" />
+         </el-form-item>
+         <el-form-item label="商品賣點" :label-width="formLabelWidth">
+            <el-input v-model="productCreate.hot_spot" autocomplete="off" />
+         </el-form-item>
+         <el-form-item label="商品描述" :label-width="formLabelWidth">
+            <el-input v-model="productCreate.description" autocomplete="off" />
+         </el-form-item>
       </el-form>
       <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">
-            Confirm
-          </el-button>
-        </span>
+         <span class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">
+               Confirm
+            </el-button>
+         </span>
       </template>
-    </el-dialog>
+   </el-dialog>
 </template>
 <script setup lang="ts">
 
 //E3E7ED
 import request from '@/utils/request';
 
-import { reactive, toRefs ,ref} from 'vue'
+import { reactive, toRefs, ref } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue';
 
 
@@ -93,6 +101,10 @@ export interface ProductQuery {
 export interface ProductCreate {
    name: string | undefined;
    category: string | undefined;
+   price: number | undefined;
+   hot_spot: string | undefined;
+   description: string | undefined;
+
 }
 const dialogFormVisible = ref(false);
 const formLabelWidth = '140px';
@@ -103,13 +115,15 @@ const formLabelWidth = '140px';
 const state = reactive({
    productList: [],
    category: [{ value: "", label: "" }],
-   produtQuery: {} as ProductQuery
+   produtQuery: {} as ProductQuery,
+   productCreate: {} as ProductCreate
 })
 
 const {
    productList,
    produtQuery,
-   category
+   category,
+   productCreate
 } = toRefs(state);
 
 
