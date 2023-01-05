@@ -26,12 +26,12 @@
 
    <el-table ref="dataTableRef" :data="productList" highlight-current-row border>
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="商品編號" prop="product_id" width="100" />
+      <el-table-column label="商品編號" prop="ID" width="100" />
       <el-table-column label="商品名稱" prop="name" width="100" />
       <el-table-column label="商品價格" prop="price" width="100" />
       <el-table-column label="商品類目" align="center" width="100" prop="category" />
-      <el-table-column label="添加时间" width="170" prop="createtime"/>
-      <el-table-column label="商品賣點" align="center" width="100" prop="product_hot" />
+      <el-table-column label="添加时间" width="170" prop="created_at"/>
+      <el-table-column label="商品賣點" align="center" width="100" prop="hot_spot" />
       <el-table-column label="商品描述" align="center" width="100" prop="description" />
       <el-table-column label="操作" align="left">
          <template #default="scope">
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 
 //E3E7ED
+import request from '@/utils/request';
 
 import { reactive, toRefs } from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue';
@@ -76,29 +77,14 @@ const {
 } = toRefs(state);
 
 
-const data: any = [
-   {
-      product_id: 1,
-      name: "香菇",
-      price: 20,
-      category: "蔬菜",
-      createtime: "2022 12-31 23:59:59",
-      product_hot: "天然香菇",
-      description: "xxxxxxxxx"
-   },
-   {
-      product_id: 2,
-      name: "香菜",
-      price: 30,
-      category: "蔬菜",
-      createtime: "2022 12-31 23:59:59",
-      product_hot: "天然香菜",
-      description: "xxxxxxxxx"
-   }
+ request({
+    url: '/admin/product',
+    method: 'get',
+  }).then((res)=>{
+   productList.value=res.data
+  })
 
-];
-
-productList.value = data
+  
 
 
 const handleSizeChange = (val: number) => {

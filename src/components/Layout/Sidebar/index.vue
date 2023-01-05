@@ -9,8 +9,8 @@
                 <el-icon><Menu /></el-icon>
                 <span>產品</span>
             </template>
-                <el-menu-item index="category">產品分類</el-menu-item>
-                <el-menu-item index="list">產品列表</el-menu-item>
+                <el-menu-item index="/product/category">產品分類</el-menu-item>
+                <el-menu-item index="/product/list">產品列表</el-menu-item>
         </el-sub-menu>
         <el-menu-item index="2">
             <el-icon><Menu /></el-icon>
