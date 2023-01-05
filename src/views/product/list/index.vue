@@ -2,26 +2,25 @@
 
    <div class="search">
       <el-form ref="queryFormRef" :inline="true">
-         <el-form-item prop="code" label="產品名稱">
-            <el-input v-model="search.code" placeholder="產品名稱" />
+         <el-form-item prop="name" label="產品名稱">
+            <el-input v-model="produtQuery.name" placeholder="產品名稱" />
          </el-form-item>
 
          <el-form-item label="產品類型" prop="region">
-            <el-select v-model="search.category" placeholder="產品類型">
-               <el-option label="Zone one" value="shanghai" />
-               <el-option label="Zone two" value="beijing" />
+            <el-select v-model="produtQuery.category" placeholder="產品類型">
+               <el-option v-for="item in category" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
          </el-form-item>
 
          <el-form-item>
-            <el-button type="primary" :icon="Search">搜索</el-button>
+            <el-button type="primary" :icon="Search" @click="serachData">搜索</el-button>
             <el-button :icon="Refresh">重置</el-button>
          </el-form-item>
       </el-form>
    </div>
 
    <div class="option">
-      <el-button type="success">添加商品</el-button>
+      <el-button type="success" @click="dialogFormVisible = true">添加商品</el-button>
    </div>
 
    <el-table ref="dataTableRef" :data="productList" highlight-current-row border>
@@ -30,7 +29,7 @@
       <el-table-column label="商品名稱" prop="name" width="100" />
       <el-table-column label="商品價格" prop="price" width="100" />
       <el-table-column label="商品類目" align="center" width="100" prop="category" />
-      <el-table-column label="添加时间" width="170" prop="created_at"/>
+      <el-table-column label="添加时间" width="170" prop="created_at" />
       <el-table-column label="商品賣點" align="center" width="100" prop="hot_spot" />
       <el-table-column label="商品描述" align="center" width="100" prop="description" />
       <el-table-column label="操作" align="left">
@@ -52,39 +51,95 @@
          :total="400">
       </el-pagination>
    </div>
+
+
+
+   <el-dialog v-model="dialogFormVisible" title="Shipping address">
+      <el-form :model="form">
+        <el-form-item label="Promotion name" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Zones" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="Please select a zone">
+            <el-option label="Zone No.1" value="shanghai" />
+            <el-option label="Zone No.2" value="beijing" />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="dialogFormVisible = false">
+            Confirm
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
 </template>
 <script setup lang="ts">
 
 //E3E7ED
 import request from '@/utils/request';
 
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs ,ref} from 'vue'
 import { Search, Refresh } from '@element-plus/icons-vue';
+
+
+export interface ProductQuery {
+   name: string | undefined;
+   category: string | undefined;
+}
+
+export interface ProductCreate {
+   name: string | undefined;
+   category: string | undefined;
+}
+const dialogFormVisible = ref(false);
+const formLabelWidth = '140px';
+
+
 
 
 const state = reactive({
    productList: [],
-   search: {
-      code: "",
-      category: ""
-
-   }
+   category: [{ value: "", label: "" }],
+   produtQuery: {} as ProductQuery
 })
 
 const {
    productList,
-   search
+   produtQuery,
+   category
 } = toRefs(state);
 
 
- request({
-    url: '/admin/product',
-    method: 'get',
-  }).then((res)=>{
-   productList.value=res.data
-  })
+//列表
+request({
+   url: '/admin/product',
+   method: 'get',
+}).then((res) => {
+   productList.value = res.data
+})
 
-  
+//種類選單
+request({
+   url: '/admin/product/category',
+   method: 'get',
+}).then((res) => {
+   const optionList: any = [];
+   const data = res.data
+   data.forEach((k: any) => {
+      const option: any = { value: "", label: "" };
+      option.value = k
+      option.label = k
+      optionList.push(option);
+   });
+   category.value = optionList
+})
+
+
+
+
 
 
 const handleSizeChange = (val: number) => {
@@ -94,6 +149,18 @@ const handleSizeChange = (val: number) => {
 
 const handleCurrentChange = (val: number) => {
    console.log(`当前页: ${val}`);
+
+}
+
+const serachData = () => {
+   //列表
+   request({
+      url: '/admin/product',
+      method: 'get',
+      params: produtQuery.value
+   }).then((res) => {
+      productList.value = res.data
+   })
 
 }
 
