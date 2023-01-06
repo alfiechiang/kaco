@@ -11,7 +11,6 @@
                <el-option v-for="item in category" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
          </el-form-item>
-
          <el-form-item>
             <el-button type="primary" :icon="Search" @click="serachData">搜索</el-button>
             <el-button :icon="Refresh">重置</el-button>
@@ -54,31 +53,39 @@
 
 
 
-   <el-dialog v-model="dialogFormVisible" title="新增商品">
-      <el-form :model="productCreate">
+   <el-dialog v-model="dialogFormVisible" title="新增商品" width="35%">
+      <el-form :model="productCreate" label-position="right">
          <el-form-item label="商品名稱" :label-width="formLabelWidth">
-            <el-input v-model="productCreate.name" autocomplete="off" />
+            <el-col :span="24">
+               <el-input v-model="productCreate.name" autocomplete="off" />
+            </el-col>
          </el-form-item>
          <el-form-item label="商品分類" :label-width="formLabelWidth">
-            <el-select v-model="productCreate.category" placeholder="Please select a zone">
+            <el-select v-model="productCreate.category" placeholder="請選擇商品類目">
                <el-option v-for="item in category" :key="item.value" :label="item.label" :value="item.value" />
             </el-select>
          </el-form-item>
          <el-form-item label="商品價格" :label-width="formLabelWidth">
-            <el-input v-model="productCreate.price" autocomplete="off" />
+            <el-col :span="24">
+               <el-input v-model="productCreate.price" autocomplete="off" />
+            </el-col>
          </el-form-item>
          <el-form-item label="商品賣點" :label-width="formLabelWidth">
-            <el-input v-model="productCreate.hot_spot" autocomplete="off" />
+            <el-col :span="24">
+               <el-input v-model="productCreate.hot_spot" autocomplete="off" />
+            </el-col>
          </el-form-item>
          <el-form-item label="商品描述" :label-width="formLabelWidth">
-            <el-input v-model="productCreate.description" autocomplete="off" />
+            <el-col :span="24">
+               <el-input v-model="productCreate.description" autocomplete="off" />
+            </el-col>
          </el-form-item>
       </el-form>
       <template #footer>
          <span class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">Cancel</el-button>
+            <el-button @click="dialogFormVisible = false">取消</el-button>
             <el-button type="primary" @click="dialogFormVisible = false, addProduct()">
-               Confirm
+               確定
             </el-button>
          </span>
       </template>
@@ -108,7 +115,7 @@ export interface ProductCreate {
 }
 
 const dialogFormVisible = ref(false);
-const formLabelWidth = '140px';
+const formLabelWidth = '80px';
 
 const state = reactive({
    productList: [],
