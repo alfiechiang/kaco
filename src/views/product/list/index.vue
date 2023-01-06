@@ -77,7 +77,7 @@
       <template #footer>
          <span class="dialog-footer">
             <el-button @click="dialogFormVisible = false">Cancel</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">
+            <el-button type="primary" @click="dialogFormVisible = false, addProduct()">
                Confirm
             </el-button>
          </span>
@@ -106,11 +106,9 @@ export interface ProductCreate {
    description: string | undefined;
 
 }
+
 const dialogFormVisible = ref(false);
 const formLabelWidth = '140px';
-
-
-
 
 const state = reactive({
    productList: [],
@@ -127,13 +125,45 @@ const {
 } = toRefs(state);
 
 
-//列表
-request({
-   url: '/admin/product',
-   method: 'get',
-}).then((res) => {
-   productList.value = res.data
-})
+const addProduct = () => {
+   request({
+      url: '/admin/product',
+      method: 'post',
+      params: productCreate.value
+   }).then((res) => {
+      showProducts()
+   })
+
+
+}
+
+const showProducts = () => {
+   //列表
+   request({
+      url: '/admin/product',
+      method: 'get',
+   }).then((res) => {
+      productList.value = res.data
+   })
+
+}
+
+const serachData = () => {
+   //列表
+   request({
+      url: '/admin/product',
+      method: 'get',
+      params: produtQuery.value
+   }).then((res) => {
+      productList.value = res.data
+   })
+
+}
+
+
+showProducts()
+
+
 
 //種類選單
 request({
@@ -166,17 +196,7 @@ const handleCurrentChange = (val: number) => {
 
 }
 
-const serachData = () => {
-   //列表
-   request({
-      url: '/admin/product',
-      method: 'get',
-      params: produtQuery.value
-   }).then((res) => {
-      productList.value = res.data
-   })
 
-}
 
 
 
