@@ -45,8 +45,8 @@
 
 
    <div class="pager">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="4"
-         :page-sizes="[100, 200, 300, 400]" :page-size="100" layout="total, sizes, prev, pager, next, jumper"
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page=currentSize
+         :page-sizes="[10,20,30]" :page-size="10" layout="total, sizes, prev, pager, next, jumper"
          :total="400">
       </el-pagination>
    </div>
@@ -103,6 +103,8 @@ import { Search, Refresh } from '@element-plus/icons-vue';
 export interface ProductQuery {
    name: string | undefined;
    category: string | undefined;
+   page :number | undefined;
+   page_size:number | undefined;
 }
 
 export interface ProductCreate {
@@ -116,6 +118,8 @@ export interface ProductCreate {
 
 const dialogFormVisible = ref(false);
 const formLabelWidth = '80px';
+
+let currentSize = ref(1);
 
 const state = reactive({
    productList: [],
@@ -145,12 +149,15 @@ const addProduct = () => {
 }
 
 const showProducts = () => {
+   produtQuery.value.page=1;
+   produtQuery.value.page_size=10;
    //列表
    request({
       url: '/admin/product',
       method: 'get',
+      params: produtQuery.value
    }).then((res) => {
-      productList.value = res.data
+      productList.value = res.data.data
    })
 
 }
@@ -162,7 +169,7 @@ const serachData = () => {
       method: 'get',
       params: produtQuery.value
    }).then((res) => {
-      productList.value = res.data
+      productList.value = res.data.data
    })
 
 }
@@ -194,13 +201,16 @@ request({
 
 
 const handleSizeChange = (val: number) => {
-   console.log(`每页 ${val} 条`);
+   currentSize.value=val
+   produtQuery.value.page=val;
+
 
 }
 
 const handleCurrentChange = (val: number) => {
-   console.log(`当前页: ${val}`);
-
+   currentSize.value=val
+   produtQuery.value.page=val;
+   serachData();
 }
 
 
