@@ -47,7 +47,7 @@
    <div class="pager">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page=currentSize
          :page-sizes="[10,20,30]" :page-size="10" layout="total, sizes, prev, pager, next, jumper"
-         :total="400">
+         :total="total">
       </el-pagination>
    </div>
 
@@ -118,8 +118,9 @@ export interface ProductCreate {
 
 const dialogFormVisible = ref(false);
 const formLabelWidth = '80px';
-
 let currentSize = ref(1);
+let total = ref(0);
+
 
 const state = reactive({
    productList: [],
@@ -158,6 +159,7 @@ const showProducts = () => {
       params: produtQuery.value
    }).then((res) => {
       productList.value = res.data.data
+      total.value =res.data.total
    })
 
 }
